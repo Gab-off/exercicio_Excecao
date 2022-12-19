@@ -1,11 +1,13 @@
 package model.entities;
 
+import model.exceptions.WithdrawExceptions;
+
 public class Account {
 	private Integer number;
 	private String holder;
 	private Double balance;
 	private Double withDrawLimit;
-	
+
 	public Account() {
 	}
 
@@ -43,13 +45,19 @@ public class Account {
 	public void setWithDrawLimit(Double withDrawLimit) {
 		this.withDrawLimit = withDrawLimit;
 	}
-	
+
 	public void deposit(Double amount) {
 		balance += amount;
 	}
-	
-	public void withdraw(Double amount) {
+
+	public void withdraw(Double amount) throws WithdrawExceptions {
+		if (amount > withDrawLimit) {
+			throw new WithdrawExceptions("The amount exceeds withdraw limit");
+		}
+		if (amount > balance) {
+			throw new WithdrawExceptions ("Not enough balance");
+		}
 		balance -= amount;
 	}
-	
+
 }
