@@ -58,6 +58,8 @@ public class Account {
 			throw new WithdrawExceptions ("Not enough balance");
 		}
 		balance -= amount;
+		System.out.println("New balance: " + String.format("%.2f", getBalance()));
+
 	}
 
 }
